@@ -7,6 +7,8 @@ interface WorkflowContextType {
     setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
     edges: Edge[];
     setEdges: React.Dispatch<React.SetStateAction<Edge[]>>;
+    PriceTriggerNodeAssetValue: string;
+    setPriceTriggerNodeAssetValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const Context = createContext<WorkflowContextType | null>(null);
@@ -14,8 +16,10 @@ export const Context = createContext<WorkflowContextType | null>(null);
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [nodes, setNodes] = React.useState<Node[]>([]);
     const [edges, setEdges] = React.useState<Edge[]>([]);
+    const [PriceTriggerNodeAssetValue, setPriceTriggerNodeAssetValue] = React.useState<string>("");
 
-    return <Context.Provider value={{ nodes, setNodes, edges, setEdges }}>
+
+    return <Context.Provider value={{ nodes, setNodes, edges, setEdges, PriceTriggerNodeAssetValue, setPriceTriggerNodeAssetValue }}>
         {children}
     </Context.Provider>
 }

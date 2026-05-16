@@ -5,3 +5,7 @@ frontend/next.config.ts
 frontend/.next
 frontend/package-lock.json
 frontend/z.learning.txt
+
+z.todos.txt
+
+backend/*

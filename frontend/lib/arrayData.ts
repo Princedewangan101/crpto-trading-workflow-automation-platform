@@ -1,4 +1,17 @@
-export const REQUIRED = [
-    { label: "Assest", inputId: "asset", inputType: "string", inputPlaceholder: "SOL_USDC" },
-    { label: "Price", inputId: "price", inputType: "number", inputPlaceholder: "105" },
+// export const REQUIRED = [
+//     { label: "Assest", inputId: "asset", inputType: "string", inputPlaceholder: "SOL_USDC" },
+//     { label: "Price", inputId: "price", inputType: "number", inputPlaceholder: "105" },
+// ]
+
+export const SELECT_EXCHANGE = [
+    {value:"hyperliquid", text:"Hyper-Liquid"},
+    {value:"excness", text:"Excness"},
+    {value:"backpack", text:"Backpack"},
+]
+
+export const SELECT_ASSET = [
+    {value:"sol", text:"SOL_USDC"},
+    {value:"btc", text:"BTC_USDC"},
+    {value:"eth", text:"ETH_USDC"},
+    {value:"pepe", text:"PEPE_USDC"},
 ]
