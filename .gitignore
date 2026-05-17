@@ -11,3 +11,8 @@ z.todos.txt
 backend/node_modules
 backend/.env
 backend/package-lock.json
+
+executor/node_modules
+executor/.env
+executor/package-lock.json
+
