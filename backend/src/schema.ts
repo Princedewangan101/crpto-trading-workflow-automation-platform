@@ -38,7 +38,11 @@ const workflowSchema = new Schema<iWorkflow>({
     description: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     nodes: { type: [nodeSchema], required: true, default: [] },
-    edges: { type: [edgeSchema], required: true, default: [] }
+    edges: { type: [edgeSchema], required: true, default: [] },
+    // new
+    lastExecutedTime: { type: Date, required: true, default: -1 },
+    onExecutor: {type:Boolean, required:true, default: false},
+
 }, { timestamps: true })
 export const Workflow = model<iWorkflow>("Workflow", workflowSchema);
 
