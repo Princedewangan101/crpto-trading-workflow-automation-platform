@@ -1,5 +1,6 @@
 'use client';
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+
 import {
     Select,
     SelectContent,
@@ -7,11 +8,13 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
+
 import { SELECT_ASSET } from '@/lib/arrayData';
 import { Context } from '../context/ContextProvider';
+import { PriceNodeMetadata } from '../nodes/PriceTriggerNode';
 
-const SelectAsset = () => {
+const SelectAsset = ({ data, from }: { data?: PriceNodeMetadata, from: string }) => {
     const context = useContext(Context)
     if (!context) { throw new Error("context not found"); }
     const SelectChangedValue = context.PriceTriggerNodeAssetValue
@@ -19,6 +22,10 @@ const SelectAsset = () => {
     function handleSelectVauleChange(selectedValue: string) {
         if (!context) { throw new Error("context not found"); }
         context.setPriceTriggerNodeAssetValue(selectedValue)
+        if (from === "priceTriggerNode") {
+            if (!data) { throw new Error("data not found"); }
+            data.onChange(data.id, data.type, "asset", selectedValue)
+        }
     }
     return (
         <Select name='asset' value={SelectChangedValue} onValueChange={handleSelectVauleChange}>

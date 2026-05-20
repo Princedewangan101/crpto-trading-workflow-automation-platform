@@ -2,7 +2,7 @@ import { Position, Handle } from '@xyflow/react';
 import { Input } from '../ui/input';
 import SelectAsset from '../app/SelectAsset';
 
-interface PriceNodeMetadata {
+export interface PriceNodeMetadata {
     id: string,
     type: string
     asset: string,
@@ -25,7 +25,7 @@ export function PriceTriggerNode({ data, isConnectable }: { data: PriceNodeMetad
                     <h1>Trigger Node</h1>
                 </div>
                 {/*  */}
-                <SelectAsset />
+                <SelectAsset data={data} from={"priceTriggerNode"} />
             </div>
             <div className='flex-col flex gap-1'>
                 <Input
@@ -34,6 +34,7 @@ export function PriceTriggerNode({ data, isConnectable }: { data: PriceNodeMetad
                     placeholder="price"
                     value={data.price}
                     onChange={(e) => { data.onChange(data.id, data.type, "price", e.target.value) }}
+                    className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
             </div>
             <Handle type="source" position={Position.Right} isConnectable={isConnectable} />

@@ -19,15 +19,16 @@ const PriceDialog = () => {
     function updateNode(id: string, type: string, nodeMetaDataField: string, nodeMetaDataFieldValue: string) {
         if (!context) { throw new Error("context not found"); }
 
-        context.setNodes((prevNode) => {
-            const filterForType = prevNode.filter(n => n.type === type)
-            return filterForType.map((n) => {
-                if (n.id !== id) return n;
-                return {
-                    ...n, data: { ...n.data, [nodeMetaDataField]: nodeMetaDataFieldValue }
+        context.setNodes((prevNode) =>
+            prevNode.map((node) => {
+                if (node.id === id && node.type === type) {
+                    return {
+                        ...node, data: { ...node.data, [nodeMetaDataField]: nodeMetaDataFieldValue }
+                    }
                 }
+                return node
             })
-        })
+        )
     }
 
     function handlePriceTriggerNodeCreation(e: any) {
@@ -76,13 +77,14 @@ const PriceDialog = () => {
                 <CardContent>
                     <form onSubmit={handlePriceTriggerNodeCreation} className='flex-col flex gap-4'>
                         <div className="flex flex-col gap-6">
-                            <SelectAsset />
+                            <SelectAsset from={"priceDialog"} />
                             <Input
                                 id="price"
                                 name="price"
                                 // value={222}
                                 type="number"
                                 placeholder="price at which action trigger"
+                                className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                 required
                             />
                         </div>
