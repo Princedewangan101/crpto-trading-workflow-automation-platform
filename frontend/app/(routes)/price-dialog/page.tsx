@@ -11,17 +11,18 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { Context } from '@/components/context/ContextProvider';
 import SelectAsset from '@/components/app/SelectAsset';
+import { NODE_KIND, NODE_TYPE } from "@/lib/arrayData";
 
 const PriceDialog = () => {
     const router = useRouter();
     const context = useContext(Context);
 
-    function updateNode(id: string, type: string, nodeMetaDataField: string, nodeMetaDataFieldValue: string) {
+    function updateNode(id: string, type: string, kind: string, nodeMetaDataField: "asset" | "price", nodeMetaDataFieldValue: string | number) {
         if (!context) { throw new Error("context not found"); }
 
         context.setNodes((prevNode) =>
             prevNode.map((node) => {
-                if (node.id === id && node.type === type) {
+                if (node.id === id && node.type === type && node.kind === kind) {
                     return {
                         ...node, data: { ...node.data, [nodeMetaDataField]: nodeMetaDataFieldValue }
                     }
@@ -32,6 +33,8 @@ const PriceDialog = () => {
     }
 
     function handlePriceTriggerNodeCreation(e: any) {
+        console.log("form submitting");
+
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget)
@@ -45,25 +48,26 @@ const PriceDialog = () => {
         if (!context) { throw new Error("context not found"); }
 
         const nodeId = crypto.randomUUID()
-        const type = 'priceTrigger'
 
         // PRICE-TRIGGER NODE CREATION
         context.setNodes(() => [
             {
                 id: nodeId,
-                type,
+                type: NODE_TYPE.PRICE_TRIGGER,
                 position: { x: 0, y: 0 },
                 data: {
                     id: nodeId,
-                    type,
+                    type: NODE_TYPE.PRICE_TRIGGER,
+                    kind: NODE_KIND.TRIGGER,
                     asset: asset,
                     price: price,
                     onChange: (
                         id: string,
                         type: string,
-                        nodeMetaDataField: string,
-                        nodeMetaDataFieldValue: string
-                    ) => updateNode(id, type, nodeMetaDataField, nodeMetaDataFieldValue)
+                        kind: string,
+                        nodeMetaDataField: "asset" | "price",
+                        nodeMetaDataFieldValue: string | number
+                    ) => updateNode(id, type, kind, nodeMetaDataField, nodeMetaDataFieldValue)
                 }
             }
         ])
@@ -83,7 +87,7 @@ const PriceDialog = () => {
                             <Input
                                 id="price"
                                 name="price"
-                                // value={222}
+                                // value={78200.30}
                                 type="number"
                                 placeholder="price at which action trigger"
                                 className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"

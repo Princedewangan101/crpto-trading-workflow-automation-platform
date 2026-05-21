@@ -1,7 +1,6 @@
 'use client'
-import React from 'react';
 import { useCallback, useContext } from 'react';
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, EdgeChange, Background, Controls, useReactFlow } from '@xyflow/react';
+import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Controls } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { Context } from '@/components/context/ContextProvider';
 import { PriceTriggerNode } from '@/components/nodes/PriceTriggerNode';
@@ -17,12 +16,10 @@ export default function Workflow() {
   const context = useContext(Context);
   if (!context) { throw new Error("useWorkflowContext must be used within a ContextProvider"); }
 
-
-
-
   const onConnectEnd = (event: any, connectionState: any) => {
     // console.log("connectionState :", connectionState);
 
+    // SELECTION AND CREATION ON NODE IS ON (components > app > SelectNode.tsx)
     switch (connectionState.fromNode.data.type) {
       case "priceTrigger":
         context.setSelectNodeDropdown("open")

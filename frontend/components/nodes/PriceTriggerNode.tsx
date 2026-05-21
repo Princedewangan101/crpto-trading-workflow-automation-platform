@@ -4,19 +4,21 @@ import SelectAsset from '../app/SelectAsset';
 
 export interface PriceNodeMetadata {
     id: string,
-    type: string
+    type: string,
+    kind: string,
     asset: string,
     price: number,
     onChange: (
         id: string,
         type: string,
+        kind: string,
         nodeMetaDataField: "asset" | "price",
         nodeMetaDataFieldValue: string | number
     ) => void
 }
 
 export function PriceTriggerNode({ data, isConnectable }: { data: PriceNodeMetadata, isConnectable: boolean }) {
-    // console.log("data :", data);
+    console.log("(pricetriggernode.tsx) data :", data);
 
     return (
         <div className='border-2 boxShadow w-50 rounded-lg p-3 flex-col flex gap-2'>
@@ -33,7 +35,7 @@ export function PriceTriggerNode({ data, isConnectable }: { data: PriceNodeMetad
                     type="number"
                     placeholder="price"
                     value={data.price}
-                    onChange={(e) => { data.onChange(data.id, data.type, "price", e.target.value) }}
+                    onChange={(e) => { data.onChange(data.id, data.type, data.kind, "price", e.target.value) }}
                     className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
             </div>

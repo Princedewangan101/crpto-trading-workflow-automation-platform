@@ -24,7 +24,7 @@ const SelectAsset = ({ data, from }: { data?: PriceNodeMetadata, from: string })
         context.setPriceTriggerNodeAssetValue(selectedValue)
         if (from === "priceTriggerNode") {
             if (!data) { throw new Error("data not found"); }
-            data.onChange(data.id, data.type, "asset", selectedValue)
+            data.onChange(data.id, data.type, data.kind, "asset", selectedValue)
         }
     }
     return (

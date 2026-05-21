@@ -9,7 +9,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { SELECT_NODE } from '@/lib/arrayData'
+import { NODE_KIND, SELECT_NODE } from '@/lib/arrayData'
 import { Context } from '../context/ContextProvider'
 import { useReactFlow } from '@xyflow/react'
 
@@ -24,12 +24,12 @@ const SelectNode = () => {
     //-------------
     // UPDATE NODE FN
     //-------------
-    function updateNode(id: string, type: string, nodeMetaDataField: string, nodeMetaDataFieldValue: string | number) {
+    function updateNode(id: string, type: string, kind:string, nodeMetaDataField: string, nodeMetaDataFieldValue: string | number) {
         if (!context) { throw new Error("context not found"); }
 
         context.setNodes((prevNode) =>
             prevNode.map((node) => {
-                if (node.id === id && node.type === type) {
+                if (node.id === id && node.type === type && node.kind === kind) {
                     return {
                         ...node, data: { ...node.data, [nodeMetaDataField]: nodeMetaDataFieldValue }
                     }
@@ -68,12 +68,13 @@ const SelectNode = () => {
             data: {
                 id: nodeId,
                 type,
+                kind: NODE_KIND.ACTION,
                 exchange: "Excness",
                 asset: "BTC_USDC",
                 side: "LONG",
                 onChange: (
-                    id: string, type: string, nodeMetaDateField: string, nodeMetaDateFieldValue: string | number
-                ) => { updateNode(id, type, nodeMetaDateField, nodeMetaDateFieldValue) }
+                    id: string, type: string,kind: string, nodeMetaDateField: string, nodeMetaDateFieldValue: string | number
+                ) => { updateNode(id, type, kind, nodeMetaDateField, nodeMetaDateFieldValue) }
             }
         }
         const newEdge = { id: edgeId, source: connectionState.fromNode.id, target: nodeId, }

@@ -4,19 +4,33 @@
 // ]
 
 export const SELECT_EXCHANGE = [
-    {value:"hyperliquid", text:"Hyper-Liquid"},
-    {value:"excness", text:"Excness"},
-    {value:"backpack", text:"Backpack"},
+    { value: "hyperliquid", text: "Hyper-Liquid" },
+    { value: "excness", text: "Excness" },
+    { value: "backpack", text: "Backpack" },
 ]
 
 export const SELECT_ASSET = [
-    {value:"sol", text:"SOL_USDC"},
-    {value:"btc", text:"BTC_USDC"},
-    {value:"eth", text:"ETH_USDC"},
-    {value:"pepe", text:"PEPE_USDC"},
+    { value: "sol", text: "SOL_USDC" },
+    { value: "btc", text: "BTC_USDC" },
+    { value: "eth", text: "ETH_USDC" },
+    { value: "pepe", text: "PEPE_USDC" },
 ]
 
 export const SELECT_NODE = [
-    {value:"exchange", text:"Exchange Node"},
-    {value:"notification", text:"Notification Node"},
+    { value: "exchange", text: "Exchange Node" },
+    { value: "notification", text: "Notification Node" },
 ]
+
+export const NODE_TYPE = {
+    "PRICE_TRIGGER": "priceTrigger",
+    "TIME_TRIGGER": "timeTrigger",
+    "EXCHANGE": "exchange",
+    "NOTIFICATION": "notification",
+    "AGENT": "agent",
+}
+
+export const NODE_KIND = {
+    "ACTION": "ACTION",
+    "TRIGGER": "TRIGGER",
+}
+
