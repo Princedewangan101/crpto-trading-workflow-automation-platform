@@ -15,3 +15,8 @@ export const SELECT_ASSET = [
     {value:"eth", text:"ETH_USDC"},
     {value:"pepe", text:"PEPE_USDC"},
 ]
+
+export const SELECT_NODE = [
+    {value:"exchange", text:"Exchange Node"},
+    {value:"notification", text:"Notification Node"},
+]

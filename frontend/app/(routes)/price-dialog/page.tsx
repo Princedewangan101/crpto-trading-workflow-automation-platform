@@ -46,6 +46,8 @@ const PriceDialog = () => {
 
         const nodeId = crypto.randomUUID()
         const type = 'priceTrigger'
+
+        // PRICE-TRIGGER NODE CREATION
         context.setNodes(() => [
             {
                 id: nodeId,

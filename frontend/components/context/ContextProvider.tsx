@@ -9,7 +9,15 @@ interface WorkflowContextType {
     setEdges: React.Dispatch<React.SetStateAction<Edge[]>>;
     PriceTriggerNodeAssetValue: string;
     setPriceTriggerNodeAssetValue: React.Dispatch<React.SetStateAction<string>>;
+    selectedNode: string;
+    setselectedNode: React.Dispatch<React.SetStateAction<string>>;
+    SelectNodeDropdown: "open" | "close";
+    setSelectNodeDropdown: React.Dispatch<React.SetStateAction<"open" | "close">>;
+    connectionState: {};
+    setconnectionState: React.Dispatch<React.SetStateAction<{}>>;
 }
+
+export type SelectNodeDropdown = "open" | "close"
 
 export const Context = createContext<WorkflowContextType | null>(null);
 
@@ -18,8 +26,27 @@ export const ContextProvider = ({ children }: { children: React.ReactNode }) => 
     const [edges, setEdges] = React.useState<Edge[]>([]);
     const [PriceTriggerNodeAssetValue, setPriceTriggerNodeAssetValue] = React.useState<string>("");
 
+    // this state carry the selected node of the user from select dropdown ,  <SelectItem> value's string  
+    const [selectedNode, setselectedNode] = React.useState<string>("");
+    const [SelectNodeDropdown, setSelectNodeDropdown] = React.useState<SelectNodeDropdown>("close");
 
-    return <Context.Provider value={{ nodes, setNodes, edges, setEdges, PriceTriggerNodeAssetValue, setPriceTriggerNodeAssetValue }}>
+    const [connectionState, setconnectionState] = React.useState({});
+
+
+    return <Context.Provider value={{
+        nodes,
+        setNodes,
+        edges,
+        setEdges,
+        PriceTriggerNodeAssetValue,
+        setPriceTriggerNodeAssetValue,
+        selectedNode,
+        setselectedNode,
+        SelectNodeDropdown,
+        setSelectNodeDropdown,
+        connectionState,
+        setconnectionState,
+    }}>
         {children}
     </Context.Provider>
 }
