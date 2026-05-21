@@ -6,6 +6,7 @@ import { Context } from '@/components/context/ContextProvider';
 import { PriceTriggerNode } from '@/components/nodes/PriceTriggerNode';
 import ExchangeActionNode from '@/components/nodes/ExchangeNode';
 import SelectNode from '@/components/app/SelectNode';
+import TimeTriggerNode from '@/components/nodes/TimeTriggerNode';
 
 
 // const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
@@ -22,6 +23,7 @@ export default function Workflow() {
     // SELECTION AND CREATION ON NODE IS ON (components > app > SelectNode.tsx)
     switch (connectionState.fromNode.data.type) {
       case "priceTrigger":
+      case "timeTrigger":
         context.setSelectNodeDropdown("open")
         context.setconnectionState(connectionState)
         break;
@@ -47,6 +49,7 @@ export default function Workflow() {
   );
 
   const nodeTypes = {
+    timeTrigger: TimeTriggerNode,
     priceTrigger: PriceTriggerNode,
     exchange: ExchangeActionNode,
     // notification:

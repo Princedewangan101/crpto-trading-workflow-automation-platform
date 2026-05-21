@@ -2,6 +2,7 @@ import React from 'react'
 import { Appbar } from '@/components/app/Appbar'
 import WorkFlowCard from '@/components/app/WorkFlowCard'
 import { workflowcard } from '@/lib/dummyData'
+import PriceDialog from '../price-dialog/page'
 
 const Dashboard = () => {
     return (
@@ -14,6 +15,7 @@ const Dashboard = () => {
                     </div>
                 ))}
             </div>
+            {/* <PriceDialog/> */}
         </div>
     )
 }

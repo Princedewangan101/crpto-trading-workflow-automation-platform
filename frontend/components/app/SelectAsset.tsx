@@ -13,8 +13,9 @@ import {
 import { SELECT_ASSET } from '@/lib/arrayData';
 import { Context } from '../context/ContextProvider';
 import { PriceNodeMetadata } from '../nodes/PriceTriggerNode';
+import { TimeNodeMetadata } from '../nodes/TimeTriggerNode';
 
-const SelectAsset = ({ data, from }: { data?: PriceNodeMetadata, from: string }) => {
+const SelectAsset = ({ data, from }: { data?: PriceNodeMetadata | TimeNodeMetadata, from: string }) => {
     const context = useContext(Context)
     if (!context) { throw new Error("context not found"); }
     const SelectChangedValue = context.PriceTriggerNodeAssetValue
