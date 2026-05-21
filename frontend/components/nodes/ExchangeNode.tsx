@@ -18,7 +18,7 @@ interface ActionNodeMetadata {
 }
 
 const ExchangeActionNode = ({ data, isConnectable }: { data: ActionNodeMetadata, isConnectable: boolean }) => {
-    console.log("action node data :", data);
+    console.log("exachange node data :", data);
     const context = useContext(Context);
 
     const [isActionNodeOpen, setisActionNodeOpen] = React.useState<boolean>(false);
@@ -38,7 +38,7 @@ const ExchangeActionNode = ({ data, isConnectable }: { data: ActionNodeMetadata,
             <div className="boxShadow">
                 <div className='rounded-md w-50 border-2 p-2 flex flex-col gap-2'>
                     <div className="flex justify-between items-center px-1 ">
-                        <h1>Action Node</h1>
+                        <h1>Exchange Node</h1>
                         <div className="flex gap-2">
                             <h1 onClick={handleActionNodeDelete} className="border rounded-md px-1.5 hover:bg-gray-700 hover:cursor-pointer">X</h1>
                             <h1 onClick={() => { isActionNodeOpen ? setisActionNodeOpen(false) : setisActionNodeOpen(true) }} className="border rounded-md px-1.5 hover:bg-gray-700 hover:cursor-pointer  ">{"<"}</h1>
@@ -96,7 +96,7 @@ const ExchangeActionNode = ({ data, isConnectable }: { data: ActionNodeMetadata,
                                     type="number"
                                     placeholder="quantity : 100"
                                     value={data.quantity}
-                                    onChange={(e) => { data.onChange(data.id, data.type, "asset", e.target.value) }}
+                                    onChange={(e) => { data.onChange(data.id, data.type, "quantity", e.target.value) }}
                                 />
                             </div>
 
@@ -106,7 +106,7 @@ const ExchangeActionNode = ({ data, isConnectable }: { data: ActionNodeMetadata,
                                     type="string"
                                     placeholder="api-key"
                                     value={data.key}
-                                    onChange={(e) => { data.onChange(data.id, data.type, "asset", e.target.value) }}
+                                    onChange={(e) => { data.onChange(data.id, data.type, "api-key", e.target.value) }}
                                 />
                             </div>
                         </>

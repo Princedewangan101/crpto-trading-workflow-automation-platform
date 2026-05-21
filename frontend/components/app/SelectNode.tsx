@@ -24,7 +24,7 @@ const SelectNode = () => {
     //-------------
     // UPDATE NODE FN
     //-------------
-    function updateNode(id: string, type: string, kind:string, nodeMetaDataField: string, nodeMetaDataFieldValue: string | number) {
+    function updateNode(id: string, type: string, kind:string, nodeMetaDataField: "asset" | "price" | "time" | "api-key" | "email", nodeMetaDataFieldValue: string | number) {
         if (!context) { throw new Error("context not found"); }
 
         context.setNodes((prevNode) =>
@@ -61,6 +61,7 @@ const SelectNode = () => {
 
         console.log("type :", type);
 
+        // ACTION NODE CREATION
         const newNode = {
             id: nodeId,
             type,
@@ -69,9 +70,6 @@ const SelectNode = () => {
                 id: nodeId,
                 type,
                 kind: NODE_KIND.ACTION,
-                exchange: "Excness",
-                asset: "BTC_USDC",
-                side: "LONG",
                 onChange: (
                     id: string, type: string,kind: string, nodeMetaDateField: string, nodeMetaDateFieldValue: string | number
                 ) => { updateNode(id, type, kind, nodeMetaDateField, nodeMetaDateFieldValue) }

@@ -7,6 +7,7 @@ import { PriceTriggerNode } from '@/components/nodes/PriceTriggerNode';
 import ExchangeActionNode from '@/components/nodes/ExchangeNode';
 import SelectNode from '@/components/app/SelectNode';
 import TimeTriggerNode from '@/components/nodes/TimeTriggerNode';
+import NotificationActionNode from '@/components/nodes/NotificationNode';
 
 
 // const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
@@ -52,7 +53,7 @@ export default function Workflow() {
     timeTrigger: TimeTriggerNode,
     priceTrigger: PriceTriggerNode,
     exchange: ExchangeActionNode,
-    // notification:
+    notification: NotificationActionNode,
     // agent:
   }
 

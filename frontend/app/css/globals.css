@@ -168,6 +168,11 @@
     0 4px 6px -1px rgba(161, 161, 170, 0.1),
     0 2px 4px -2px rgba(161, 161, 170, 0.1);
 }
+.Shadow {
+  box-shadow:
+    0 4px 6px -1px rgba(161, 161, 170, 0.1),
+    0 2px 4px -2px rgba(161, 161, 170, 0.1);
+}
 
 @layer base {
   * {
