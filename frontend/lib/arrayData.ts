@@ -28,6 +28,12 @@ export const SELECT_MODEL = [
     { value: "gemini3p5flash", text: "gemini-3.5-flash" },
 ]
 
+export const SELECT_TOOL = [
+    { value: "sentimental_analysis", text: "sentimental_analysis" },
+    { value: "technical_indicator_fetcher", text: "technical_indicator_fetcher" },
+    { value: "order_book_depth_finder", text: "order_book_depth_finder" },
+]
+
 export const NODE_TYPE = {
     "PRICE_TRIGGER": "priceTrigger",
     "TIME_TRIGGER": "timeTrigger",

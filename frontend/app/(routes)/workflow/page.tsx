@@ -11,7 +11,10 @@ import NotificationActionNode from '@/components/nodes/NotificationNode';
 import AgentNode from '@/components/nodes/AgentNode';
 import { NODE_KIND } from '@/lib/arrayData';
 import SelectModel from '@/components/app/SelectModel';
-import Gemini from '@/components/nodes/geminiNode/gemini-2.5-flash';
+import Gemini from '@/components/nodes/model/gemini-2.5-flash';
+import SelectTool from '@/components/app/SelectTool';
+import technicalAnalysisFetcherNode from '@/components/nodes/tool/technicalAnalysis';
+import AgentPrompt from '@/components/app/AgentPrompt';
 
 
 // const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
@@ -35,7 +38,15 @@ export default function Workflow() {
         break;
 
       case NODE_KIND.AGENT:
-        context.setSelectNodeDropdown("AGENT")
+        console.log(1);
+        if (connectionState.fromPosition === "right") {
+          context.setSelectNodeDropdown("NODE")
+        } else if (connectionState.fromHandle.id === "output-1") {
+          context.setSelectNodeDropdown("MODEL")
+        } else if (connectionState.fromHandle.id === "output-2" || "output-3") {
+                  console.log(2);
+          context.setSelectNodeDropdown("TOOL")
+        }
         break;
 
       case NODE_KIND.TOOL:
@@ -70,10 +81,13 @@ export default function Workflow() {
     exchange: ExchangeActionNode,
     notification: NotificationActionNode,
     agent: AgentNode,
-    gemini2p0flash:Gemini,
-    gemini2p5flash:Gemini,
-    gemini3p0flash:Gemini,
-    gemini3p5flash:Gemini,
+    gemini2p0flash: Gemini,
+    gemini2p5flash: Gemini,
+    gemini3p0flash: Gemini,
+    gemini3p5flash: Gemini,
+    technical_indicator_fetcher:technicalAnalysisFetcherNode,
+    // sentimental_analysis:,
+    // order_book_depth_finder:,
   }
 
   return (
@@ -95,6 +109,8 @@ export default function Workflow() {
       </ReactFlow>
       <SelectNode />
       <SelectModel />
+      <SelectTool />
+      <AgentPrompt/>
     </div>
   );
 }

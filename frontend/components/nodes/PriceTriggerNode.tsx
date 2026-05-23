@@ -39,7 +39,11 @@ export function PriceTriggerNode({ data, isConnectable }: { data: PriceNodeMetad
                     className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
             </div>
-            <Handle type="source" position={Position.Right} isConnectable={isConnectable} />
+            <Handle style={{
+                width: '16px',
+                height: '16px',
+                backgroundColor: '#777777',
+            }} type="source" position={Position.Right} isConnectable={isConnectable} />
         </div>
     );
 }

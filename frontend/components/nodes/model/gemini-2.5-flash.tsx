@@ -36,7 +36,6 @@ const Gemini = ({ data, isConnectable }: { data: ModelNodeMetadata, isConnectabl
             </main>
             <h1 onClick={handleActionNodeDelete} className="border boxShadow rounded-full py-2 px-2 mt-2 text-center w-10 mx-auto hover:bg-gray-700 hover:cursor-pointer hidden group-hover:block">X</h1>
             <Handle type="target" position={Position.Top} isConnectable={isConnectable} />
-            {/* <button onClick={data.onChange(data.id, data.type, data.kind , "type", data.type)}>change</button> */}
         </div>
     )
 }
