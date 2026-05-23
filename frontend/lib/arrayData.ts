@@ -21,6 +21,13 @@ export const SELECT_NODE = [
     { value: "notification", text: "Notification Node" },
 ]
 
+export const SELECT_MODEL = [
+    { value: "gemini2p0flash", text: "gemini-2.0-flash" },
+    { value: "gemini2p5flash", text: "gemini-2.5-flash" },
+    { value: "gemini3p0flash", text: "gemini-3.0-flash" },
+    { value: "gemini3p5flash", text: "gemini-3.5-flash" },
+]
+
 export const NODE_TYPE = {
     "PRICE_TRIGGER": "priceTrigger",
     "TIME_TRIGGER": "timeTrigger",
@@ -32,5 +39,8 @@ export const NODE_TYPE = {
 export const NODE_KIND = {
     "ACTION": "ACTION",
     "TRIGGER": "TRIGGER",
+    "AGENT": "AGENT",
+    "MODEL": "MODEL",
+    "TOOL": "TOOL",
 }
 

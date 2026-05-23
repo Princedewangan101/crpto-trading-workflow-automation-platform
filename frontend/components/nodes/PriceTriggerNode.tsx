@@ -18,7 +18,7 @@ export interface PriceNodeMetadata {
 }
 
 export function PriceTriggerNode({ data, isConnectable }: { data: PriceNodeMetadata, isConnectable: boolean }) {
-    console.log("(pricetriggernode.tsx) data :", data);
+    // console.log("(pricetriggernode.tsx) data :", data);
 
     return (
         <div className='border-2 boxShadow w-50 rounded-lg p-3 flex-col flex gap-2'>

@@ -9,17 +9,15 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { NODE_KIND, SELECT_NODE } from '@/lib/arrayData'
+import { NODE_KIND, SELECT_MODEL } from '@/lib/arrayData'
 import { Context } from '../context/ContextProvider'
 import { useReactFlow } from '@xyflow/react'
 
-const SelectNode = () => {
+const SelectModel = () => {
     const { screenToFlowPosition } = useReactFlow();
 
     const context = useContext(Context)
-    if (!context) {
-        throw new Error("context not found !");
-    }
+    if (!context) { throw new Error("context not found !"); }
 
     //-------------
     // UPDATE NODE FN
@@ -42,13 +40,15 @@ const SelectNode = () => {
     //-------------
     // AFTER SELECTING ACTION NODE THIS FN RUNS
     //-------------
-    function selectActionNode(selectedValue: string) {
+    function selectModel(selectedValue: string) {
+        console.log(1);
+        
         if (!context) {
             throw new Error("context not found !");
         }
         const connectionState = context.connectionState
-        console.log("context :", context);
-        console.log("connectionState :", connectionState);
+        // console.log("context :", context);
+        // console.log("connectionState :", connectionState);
 
         const flowPosition = screenToFlowPosition({
             x: connectionState.to.x,
@@ -59,9 +59,9 @@ const SelectNode = () => {
         const edgeId = crypto.randomUUID()
         const type = selectedValue
 
-        console.log("type :", type);
+        // console.log("type :", type);
 
-        // ACTION NODE CREATION
+        // MODEL NODE CREATION
         const newNode = {
             id: nodeId,
             type,
@@ -69,13 +69,16 @@ const SelectNode = () => {
             data: {
                 id: nodeId,
                 type,
-                kind: type === "agent" ? NODE_KIND.AGENT : NODE_KIND.ACTION,
+                kind: NODE_KIND.MODEL,
                 onChange: (
-                    id: string, type: string, kind: string, nodeMetaDateField: "asset" | "price" | "time" | "api-key" | "email", nodeMetaDateFieldValue: string | number
+                    id: string, type: string, kind: string, nodeMetaDateField: any, nodeMetaDateFieldValue: string | number
                 ) => { updateNode(id, type, kind, nodeMetaDateField, nodeMetaDateFieldValue) }
             }
         }
-        const newEdge = { id: edgeId, source: connectionState.fromNode.id, target: nodeId, }
+        console.log("new node nodeID : ", nodeId);
+        
+        const newEdge = { id: edgeId, source: connectionState.fromNode.id, target: nodeId,  sourceHandle: connectionState.fromHandle.id,}
+        console.log("newEdge:",newEdge);
         context.setNodes((prevNodes: any) => [...prevNodes, newNode])
         context.setEdges((prevEdges: any) => [...prevEdges, newEdge])
         context.setselectedNode("")
@@ -85,29 +88,25 @@ const SelectNode = () => {
     // HANDLER FOR CHANGE IN SELECT<>
     //-------------
     const handleNodeChange = (selectedValue: string) => {
-        console.log("handleNodeChange fn - selectedValue :", selectedValue);
+        // console.log("handleNodeChange fn - selectedValue :", selectedValue);
 
-        if (!context) {
-            throw new Error("context not found !");
-        }
+        if (!context) { throw new Error("context not found !"); }
         context.setselectedNode(selectedValue)
         context.setSelectNodeDropdown(null)
-        selectActionNode(selectedValue)
+        selectModel(selectedValue)
     }
 
     return (
-        <div className={`${context.SelectNodeDropdown === "NODE" ? "block" : "hidden"} absolute top-0 left-0 bottom-0 right-0 flex justify-center items-center backdrop-blur-[1.3px]`}>
+        <div className={`${context.SelectNodeDropdown === "AGENT" ? "block" : "hidden"} absolute top-0 left-0 bottom-0 right-0 flex justify-center items-center backdrop-blur-[1.3px]`}>
             <div className='bg-zinc-900 rounded-lg'>
                 <Select value={context.selectedNode} onValueChange={handleNodeChange}>
                     <SelectTrigger className="w-full max-w-48">
-                        <SelectValue placeholder="Select a Action Node" />
+                        <SelectValue placeholder="Select a Model Node" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectLabel>agent</SelectLabel>
-                            <SelectItem value="agent">Ai-Agent</SelectItem>
-                            <SelectLabel>normal</SelectLabel>
-                            {SELECT_NODE.map(({ value, text }, idx) => (
+                            <SelectLabel>models</SelectLabel>
+                            {SELECT_MODEL.map(({ value, text }, idx) => (
                                 <div key={idx}>
                                     <SelectItem value={value}>{text}</SelectItem>
                                 </div>
@@ -120,4 +119,4 @@ const SelectNode = () => {
     )
 }
 
-export default SelectNode
+export default SelectModel

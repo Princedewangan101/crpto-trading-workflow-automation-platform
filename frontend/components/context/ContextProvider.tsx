@@ -11,8 +11,8 @@ interface WorkflowContextType {
     setPriceTriggerNodeAssetValue: React.Dispatch<React.SetStateAction<string>>;
     selectedNode: string;
     setselectedNode: React.Dispatch<React.SetStateAction<string>>;
-    SelectNodeDropdown: "open" | "close";
-    setSelectNodeDropdown: React.Dispatch<React.SetStateAction<"open" | "close">>;
+    SelectNodeDropdown: "NODE" | "AGENT"  | null;
+    setSelectNodeDropdown: React.Dispatch<React.SetStateAction<"NODE" | "AGENT" | null>>;
     connectionState: {};
     setconnectionState: React.Dispatch<React.SetStateAction<{}>>;
 }

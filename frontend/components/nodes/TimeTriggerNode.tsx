@@ -34,6 +34,7 @@ const TimeTriggerNode = ({ data, isConnectable }: { data: TimeNodeMetadata, isCo
                     id="price"
                     type="number"
                     placeholder="time in seconds"
+                    // value="30000"
                     value={data.time}
                     onChange={(e) => { data.onChange(data.id, data.type, data.kind, "time", e.target.value) }}
                     className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
