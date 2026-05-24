@@ -17,7 +17,7 @@ export const User = model<iUser>("User", userSchema);
 // workflow schema
 // ----------------------------------
 
-const nodeSchema = new Schema<iNodes>({
+const nodeSchema = new Schema({
     id: { type: String, required: true },
     type: { type: String, required: true },
     position: {
@@ -27,22 +27,20 @@ const nodeSchema = new Schema<iNodes>({
     data: { type: Schema.Types.Mixed, required: true }
 }, { id: false })
 
-const edgeSchema = new Schema<iEdges>({
+const edgeSchema = new Schema({
     id: { type: String, required: true },
     source: { type: String, required: true },
     target: { type: String, required: true }
 }, { id: false })
 
-const workflowSchema = new Schema<iWorkflow>({
+const workflowSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     nodes: { type: [nodeSchema], required: true, default: [] },
     edges: { type: [edgeSchema], required: true, default: [] },
-    // new
     lastExecutedTime: { type: Date, required: true, default: -1 },
-    onExecutor: {type:Boolean, required:true, default: false},
-
+    onExecution: {type:Boolean, required:true, default: false},
 }, { timestamps: true })
 export const Workflow = model<iWorkflow>("Workflow", workflowSchema);
 
@@ -50,7 +48,7 @@ export const Workflow = model<iWorkflow>("Workflow", workflowSchema);
 // execution schema
 // ----------------------------------
 
-const executionSchema = new Schema<iExecution>({
+const executionSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     workflowId: { type: Schema.Types.ObjectId, ref: 'Workflow', required: true, unique: true },
     response: { type: String, required: true }

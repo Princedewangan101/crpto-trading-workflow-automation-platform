@@ -33,7 +33,7 @@ async function execute() {
     if (TRIGGERs.includes(triggerNode.type)) {
         await triggerNodeExecutor(workflow, triggerNode)
     } else {
-        console.log(`TRIGGERs not includes triggerNode.type : ${triggerNode.type} (file: execute.ts)`);
+        console.log(`invalid trigger node`);
     }
 }
 
@@ -57,8 +57,6 @@ async function triggerNodeExecutor(workflow: Workflow, triggerNode: Node) {
 
         if (!edges) {
             console.log("edges not found !");
-            var executeNextNodeLoop = false
-            return executeNextNodeLoop
         }
 
         const connectedActionNodes = edges.map(({ target }: { target: string }) => {
@@ -92,6 +90,7 @@ async function triggerNodeExecutor(workflow: Workflow, triggerNode: Node) {
 
 }
 
+// HERE WE HAVE MAKE MODIFICATION FOR THE AGENT NODE -  
 async function actionNodeExceutor(key: string, node: any) {
     switch (node.type) {
         case "exchangeAction":
