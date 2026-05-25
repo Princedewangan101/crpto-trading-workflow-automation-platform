@@ -2,7 +2,7 @@ import { MemorySaver } from "@langchain/langgraph";
 import { context, createAgent, toolStrategy } from "langchain";
 import type { Workflow } from "../../types.js";
 import { redis } from "../redis.js";
-import { MODEL, SYSTEM_PROMPT, AGENT_FINAL_RESPONSE_FORMATE } from "./agentSetup.js";
+import { MODEL, SYSTEM_PROMPT, AGENT_FINAL_RESPONSE_FORMATE } from "./agentConfig.js";
 
 const iagent = createAgent({
     model: MODEL,
