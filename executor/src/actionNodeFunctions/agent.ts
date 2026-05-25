@@ -3,10 +3,12 @@ import { context, createAgent, toolStrategy } from "langchain";
 import type { Workflow } from "../../types.js";
 import { redis } from "../redis.js";
 import { MODEL, SYSTEM_PROMPT, AGENT_FINAL_RESPONSE_FORMATE } from "./agentConfig.js";
+import { getRSI } from "../tools/getRSI.js";
+import { getEMA } from "../tools/getEMA.js";
 
 const iagent = createAgent({
     model: MODEL,
-    tools: [],
+    tools: [getRSI, getEMA],
     checkpointer: new MemorySaver(),
     systemPrompt: SYSTEM_PROMPT,
     responseFormat: toolStrategy(AGENT_FINAL_RESPONSE_FORMATE)
