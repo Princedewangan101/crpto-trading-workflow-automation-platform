@@ -13,6 +13,7 @@ export interface Execution {
 }
 
 export interface Workflow {
+    id: string,
     title: string, description: string, userId: Types.ObjectId,
     nodes: Nodes[], edges: Edges[]
 }
